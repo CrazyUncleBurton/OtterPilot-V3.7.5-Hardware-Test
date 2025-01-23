@@ -25,16 +25,22 @@ Github Repository:  OtterPilot-v3.6.0
 
 1) Connect RX1 receiver input to the SERVO1 Steering servo output.
 2) Connect RX2 receiver input to the SERVO2 Throttle servo output.
-3) Connect the OtterPilot to anything that can supply 5V to the USB-C port.  Note:  Powering the device with USB will result in a low voltage reading because of the backfeed diode.  If it measures 4.3+V, it's probably fine.  Power with the BEC from the receiver to be sure.
-4) Connect the GPS to the external I2C port (the white connector on the black microcontroller board).
-5) If used, connect the SparkFun OpenSD MicroSD card to the external GPS open port (the white connector on the black microcontroller board).
-6) The tests are automated.  If the test passes, the text is green.  If the test detects a fixable issue, the text is yellow.  If the text fails, the text is red.
-7) Watch the test a few times to be sure those things are working before proceeding.
-8) Disconnect the RX1 and SERVO1 connectors.  
-9) Connect the RX1 receiver input to the SERVO3 Steering servo output.
-10) Watch the Steering/Aux test and make sure it still succeeds.  We know RX1 is good, so we are testing SERVO3 output here.
-11) Disconnect the RX1 and SERVO3 connectors.
-12) Connect the RX1 and SERVO4 connectors and make sure the STEERING/AUX test still succeeds.  We know RX1 is good, so we are testing SERVO4 output here.
+3) Connect RX3 receiver input to the SERVO3 Channel 3 servo output.
+4) Connect the OtterPilot to anything that can supply 5V to the USB-C port.  Note:  Powering the device with USB will result in a low voltage reading because of the backfeed diode.  If it measures 4.3+V, it's probably fine.  Power with the BEC from the receiver to be sure.
+5) Connect the GPS to the external I2C port (the white connector on the black microcontroller board).
+6) If used, connect the SparkFun OpenSD MicroSD card to the external GPS open port (the white connector on the black microcontroller board).
+
+Note:  The tests are automated.  If the test passes, the text is green.  If the test detects a fixable issue, the text is yellow.  If the text fails, the text is red.  Watch the test a few times to be sure those things are working before proceeding.
+8) Watch the PCA9685 line - it should be green.
+9) Watch the LSM6DSOX line - it should be green.
+10) Watch the GPS line - it should be green.
+11) Watch the OpenLog line - it should be green if the OpenLog is connected.
+12) Watch the Steering line - it should be green.
+13) Watch the Throttle line - it should be green.
+14) Watch the Channel 3 line - it should be green.
+15) Disconnect the RX1 and SERVO1 connectors.  
+16) Connect the RX1 receiver input to the SERVO4 Steering servo output.
+17) Watch the Steering/Aux test and make sure it still succeeds.  We know RX1 is good, so we are testing SERVO4 output here.
 
 ## I2C Info
 
@@ -68,7 +74,6 @@ The internal I2C Bus Speed is 1MHz.  Everything on the OtterPilot board is conne
 
 * 0x10 - PA1010D GPS - Internal or External I2C bus
 * 0x15 - CST816S Touch Controller - permanently connected to the Internal I2C bus
-* 0x1C - LIS3MDL 3 Axis Magnetometer - permanently connected to the Internal I2C bus - v375 is made without this
 * 0x2A - Atmega 328P Used by OpenLogger MicroSD Card - Internal or External I2C bus
 * 0x40 - PCA9685 PWM Servo Controller - permanently connected to the Internal I2C bus
 * 0x6A - LSM6DSOX - 6DOF IMU - permanently connected to the Internal I2C bus

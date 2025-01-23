@@ -172,11 +172,11 @@ void PulseTimer2()
 // Timer interrupt service routine to update the Pulse width counter in
 // microseconds for CH3 / Aux Channel
 void PulseTimer3(){
-  CurrentTime4 = micros();
+  CurrentTime3 = micros();
   int PulseState3=digitalRead(FREQUENCY_INPUT3);
   if (PulseState3==0) {
     Pulses3 = CurrentTime3 - StartTime3;
-    StartTime4 = CurrentTime4;
+    StartTime3 = CurrentTime4;
   }
   if (PulseState3==1) {
     StartTime3 = CurrentTime3;
@@ -237,6 +237,9 @@ void setup()
 
   // Throttle / Channel 2
   attachInterrupt(digitalPinToInterrupt(FREQUENCY_INPUT2), PulseTimer2, CHANGE);
+
+  // Channel 3 
+  attachInterrupt(digitalPinToInterrupt(FREQUENCY_INPUT3), PulseTimer3, CHANGE);
 
   // Calibration / Channel 4
   attachInterrupt(digitalPinToInterrupt(FREQUENCY_INPUT4), PulseTimer4, CHANGE);
@@ -493,6 +496,24 @@ void loop()
     tft.println((int)Pulses2);
     Serial.print("Throttle Channel Measured: ");
     Serial.println((int)Pulses2);
+  }
+
+  // Test Frequency measurement input from Third Channel
+  // Pulses3 has current measured pulse width for PWM2 (connected to RX3)
+  if (abs((int)Pulses3 - 1500) <= 100 )
+  {
+    tft.setTextColor(TFT_GREEN, TFT_BLACK); // Set Text and Background Color
+    tft.print("Channel 3 Measured: ");
+    tft.print((int)Pulses3);
+    tft.println("uS");
+    Serial.print("Channel 3 Measured: ");
+    Serial.println((int)Pulses3);
+  } else {
+    tft.setTextColor(TFT_RED, TFT_BLACK); // Set Text and Background Color
+    tft.print("Channel 3 Measured: ");
+    tft.println((int)Pulses3);
+    Serial.print("Channel 3 Measured: ");
+    Serial.println((int)Pulses3);
   }
 
   // Pulses4 has the current measured pulse width for PWM2 (connected internally to CAL Input)
